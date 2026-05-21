@@ -46,6 +46,8 @@ public/                         ← Static assets (images, robots.txt, favicon)
 
 ## Deployment
 
+### Via Wrangler CLI
+
 ```bash
 # One-time secrets setup
 npx wrangler pages secret put TURNSTILE_SECRET_KEY
@@ -56,6 +58,36 @@ npx wrangler pages secret put CONTACT_FROM_EMAIL
 # Build and deploy
 npm run pages:deploy
 ```
+
+### Via Cloudflare MCP (AI agent deployment)
+
+If your AI coding environment has the **Cloudflare MCP** server configured (`https://mcp.cloudflare.com/mcp` with OAuth), you can deploy directly from your agent:
+
+1. **Authenticate** — the Cloudflare MCP uses OAuth. Run `cloudflare_mcp_authenticate` (or equivalent) in your agent session. This opens a browser to authorize your Cloudflare account. The session stores the token for the duration of the conversation.
+
+2. **Create or update the Pages project** — use the Cloudflare MCP to create a Pages project linked to your GitHub repo, or use the direct upload method.
+
+3. **Set secrets** — use the Cloudflare MCP to set the required environment variables (secrets) on your Pages project:
+   - `TURNSTILE_SECRET_KEY`
+   - `TURNSTILE_SITE_KEY`
+   - `CONTACT_TO_EMAIL`
+   - `CONTACT_FROM_EMAIL`
+
+4. **Trigger a deploy** — push to the `main` branch (auto-deploys if Git integration is set up) or use the Cloudflare Builds MCP to trigger a manual deployment.
+
+**Prerequisites:** The Cloudflare MCP must be configured in your AI tool's MCP settings:
+```json
+{
+  "mcpServers": {
+    "cloudflare": {
+      "url": "https://mcp.cloudflare.com/mcp",
+      "auth": "oauth"
+    }
+  }
+}
+```
+
+> When an AI agent has the Cloudflare MCP available, it can handle the entire deploy workflow. Just ask: **"Deploy this site to Cloudflare Pages"** and the agent will authenticate, set up the project, configure secrets, and push it live.
 
 ## How to Customize the Site
 

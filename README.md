@@ -185,6 +185,44 @@ Imports `AGENTS.md` and adds Claude Code-specific conventions (plan mode, auto m
 
 When you add a new command, change the tech stack, or update deployment steps, edit **`AGENTS.md`** — it's the single source. `CLAUDE.md` pulls from it via the `@AGENTS.md` import syntax, so it stays in sync automatically.
 
+### Deploying with Cloudflare MCP
+
+This project is Cloudflare-native and can be deployed by AI agents using the **Cloudflare MCP server**.
+
+#### What is the Cloudflare MCP?
+
+The [Cloudflare MCP](https://mcp.cloudflare.com) is a Model Context Protocol server that gives AI coding assistants direct access to your Cloudflare account. With OAuth authentication, an agent can create Pages projects, set environment secrets, and trigger deployments — all without leaving the chat.
+
+#### Setup
+
+The Cloudflare MCP is configured in your AI tool's MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "cloudflare": {
+      "url": "https://mcp.cloudflare.com/mcp",
+      "auth": "oauth"
+    }
+  }
+}
+```
+
+It uses **OAuth** — the first time you use it, your AI tool will open a browser tab to authorize with your Cloudflare account. No API tokens or secrets to manage manually.
+
+#### What an AI agent can do with it
+
+| Task | Agent prompt |
+|------|-------------|
+| Full deploy | "Deploy this site to Cloudflare Pages" |
+| Set secrets | "Set the TURNSTILE_SECRET_KEY on my Pages project" |
+| Trigger build | "Trigger a new production deployment" |
+| Check status | "What's the deployment status of my site?" |
+
+The agent will authenticate via OAuth, create/update the Pages project, configure the required secrets (`TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`), build the site, and push it live.
+
+**Pro tip:** Connect your GitHub repo to Cloudflare Pages for automatic deploys on every push — then you only need the MCP for secrets management and one-off manual triggers.
+
 ## Environment Variables
 
 | Variable | Required | Description |
