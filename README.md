@@ -26,6 +26,7 @@ Built with **Astro**, **Tailwind CSS**, **Cloudflare Pages**, and **Cloudflare T
 - ✅ **Mobile-first** — responsive design that looks great on any device
 - ✅ **Fast by default** — static-first, minimal client JS, optimized images
 - ✅ **Privacy & thank-you pages** included
+- ✅ **AI-ready** — `AGENTS.md` + `CLAUDE.md` for AI coding assistant integration
 - ✅ **MIT licensed** — use it for anything
 
 ## Tech Stack
@@ -159,6 +160,31 @@ To use SVG icons instead, edit `src/components/Services.astro`.
 
 Gallery is disabled by default. To enable it, set `gallery.enabled: true` in `site.config.ts` and add your images to the `gallery.items` array. Images should be placed in `public/images/gallery/`.
 
+## AI-Assisted Development
+
+This template includes agent instruction files for AI coding assistants (Claude Code, Codex CLI, Cursor, Copilot, etc.).
+
+### `AGENTS.md` (cross-tool)
+
+The canonical source of truth read by most AI coding tools. Covers project overview, tech stack, commands, deployment workflow, customization guide, code conventions, architecture rules, and agent behavior guidelines.
+
+### `CLAUDE.md` (Claude Code)
+
+Imports `AGENTS.md` and adds Claude Code-specific conventions (plan mode, auto memory, skills, hooks). Both tools see the same instructions without duplication.
+
+### How to use with AI tools
+
+| Tool | What it reads | Notes |
+|------|--------------|-------|
+| Claude Code | `CLAUDE.md` (and by extension `AGENTS.md`) | Loads automatically at session start |
+| Codex CLI | `AGENTS.md` | Reads on project initialization |
+| Cursor | `.cursorrules` (create from `AGENTS.md`) | Symlink or copy |
+| Copilot | `.github/copilot-instructions.md` (create from `AGENTS.md`) | Required for Copilot context |
+
+### Keeping instructions up to date
+
+When you add a new command, change the tech stack, or update deployment steps, edit **`AGENTS.md`** — it's the single source. `CLAUDE.md` pulls from it via the `@AGENTS.md` import syntax, so it stays in sync automatically.
+
 ## Environment Variables
 
 | Variable | Required | Description |
@@ -219,6 +245,8 @@ small-business-site-template/
 ├── astro.config.mjs              ← Astro configuration
 ├── tsconfig.json
 ├── .env.example                  ← Environment variable template
+├── AGENTS.md                     ← AI agent instructions (cross-tool)
+├── CLAUDE.md                     ← Claude Code instructions (imports AGENTS.md)
 └── package.json
 ```
 
