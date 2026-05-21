@@ -1,0 +1,18 @@
+# Cloudflare Pages configuration
+# https://developers.cloudflare.com/pages/
+name = "small-business-site-template"
+compatibility_date = "2026-03-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Email binding for forwarding contact form submissions
+# You must verify the sender email in Cloudflare Dashboard
+# https://developers.cloudflare.com/email-routing/
+[[send_email]]
+name = "EMAIL_BINDING"
+
+[env.production]
+# Set these secrets in Cloudflare Dashboard or via wrangler:
+# wrangler pages secret put TURNSTILE_SECRET_KEY
+# wrangler pages secret put CONTACT_TO_EMAIL
+# wrangler pages secret put CONTACT_FROM_EMAIL
+# wrangler pages secret put TURNSTILE_SITE_KEY

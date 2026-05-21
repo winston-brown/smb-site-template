@@ -1,0 +1,35 @@
+---
+import { siteConfig } from "../config/site.config";
+---
+
+{siteConfig.whyChooseUs.items.length > 0 && (
+  <section
+    id="why-choose-us"
+    class="section-padding bg-gray-50"
+    aria-label="Why choose us"
+  >
+    <div class="container-narrow">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          {siteConfig.whyChooseUs.headline}
+        </h2>
+        <p class="mt-4 text-lg text-gray-600">
+          Here's what sets us apart from the competition.
+        </p>
+      </div>
+
+      <div class="mt-12 mx-auto max-w-3xl">
+        <ul class="space-y-4">
+          {siteConfig.whyChooseUs.items.map((item, index) => (
+            <li class="flex gap-4 rounded-lg bg-white p-4 shadow-sm border border-gray-100">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-700">
+                {index + 1}
+              </span>
+              <p class="pt-1 text-gray-700">{item}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+)}

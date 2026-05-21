@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; color: #333; }
+    .header { background: #2563eb; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .header h1 { margin: 0; font-size: 20px; }
+    .body { padding: 20px; border: 1px solid #e5e7eb; border-top: 0; border-radius: 0 0 8px 8px; }
+    .field { margin-bottom: 12px; }
+    .field-label { font-weight: 600; font-size: 12px; color: #6b7280; text-transform: uppercase; }
+    .field-value { margin-top: 2px; }
+    .message { background: #f9fafb; padding: 12px; border-radius: 6px; margin-top: 16px; white-space: pre-wrap; }
+    .footer { margin-top: 16px; font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>New Website Lead</h1>
+  </div>
+  <div class="body">
+    <div class="field">
+      <div class="field-label">Name</div>
+      <div class="field-value">{{name}}</div>
+    </div>
+    <div class="field">
+      <div class="field-label">Email</div>
+      <div class="field-value"><a href="mailto:{{email}}">{{email}}</a></div>
+    </div>
+    <div class="field">
+      <div class="field-label">Phone</div>
+      <div class="field-value">{{phone}}</div>
+    </div>
+    <div class="field">
+      <div class="field-label">Service Needed</div>
+      <div class="field-value">{{service}}</div>
+    </div>
+    <div class="field">
+      <div class="field-label">Preferred Contact</div>
+      <div class="field-value">{{preferredContact}}</div>
+    </div>
+    <div class="field">
+      <div class="field-label">City / ZIP</div>
+      <div class="field-value">{{city}}</div>
+    </div>
+    <div class="field-label">Message</div>
+    <div class="message">{{message}}</div>
+    <div class="footer">
+      Submitted: {{timestamp}}<br>
+      IP: {{ip}}
+    </div>
+  </div>
+</body>
+</html>

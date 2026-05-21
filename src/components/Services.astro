@@ -1,0 +1,58 @@
+---
+import { siteConfig } from "../config/site.config";
+---
+
+{siteConfig.services.length > 0 && (
+  <section
+    id="services"
+    class="section-padding bg-white"
+    aria-label="Services"
+  >
+    <div class="container-narrow">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Our Services
+        </h2>
+        <p class="mt-4 text-lg text-gray-600">
+          Professional solutions tailored to your needs.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {siteConfig.services.map((service) => (
+          <article class="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-brand-200">
+            {service.icon && (
+              <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100 text-brand-600">
+                <span class="text-lg font-bold" aria-hidden="true">
+                  {service.icon === "Home" ? "🏠" :
+                   service.icon === "Building2" ? "🏢" :
+                   service.icon === "Clock" ? "⏰" :
+                   service.icon === "ShieldCheck" ? "🛡️" :
+                   service.icon === "MessageSquare" ? "💬" :
+                   service.icon === "Wrench" ? "🔧" : "⭐"}
+                </span>
+              </div>
+            )}
+            <h3 class="text-lg font-semibold text-gray-900">
+              {service.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">
+              {service.description}
+            </p>
+            {service.link && (
+              <a
+                href={service.link}
+                class="mt-4 inline-flex items-center text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
+              >
+                {service.ctaLabel || "Learn more"}
+                <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

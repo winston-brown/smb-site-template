@@ -1,0 +1,25 @@
+---
+import { siteConfig } from "../config/site.config";
+---
+
+<section
+  class="section-padding bg-gradient-to-r from-brand-700 to-brand-800"
+  aria-label="Call to action"
+>
+  <div class="container-narrow">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        {siteConfig.finalCta.headline}
+      </h2>
+      <p class="mt-4 text-lg text-brand-100">
+        {siteConfig.finalCta.subheadline}
+      </p>
+      <a
+        href={siteConfig.finalCta.ctaHref}
+        class="mt-8 inline-flex items-center justify-center rounded-lg bg-white px-8 py-4 text-base font-semibold text-brand-700 shadow-sm transition-all hover:bg-brand-50"
+      >
+        {siteConfig.finalCta.cta}
+      </a>
+    </div>
+  </div>
+</section>

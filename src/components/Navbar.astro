@@ -1,0 +1,111 @@
+---
+import { siteConfig } from "../config/site.config";
+---
+
+<nav
+  class="sticky top-0 z-40 border-b border-gray-100 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80"
+  aria-label="Main navigation"
+>
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <!-- Logo / Business Name -->
+    <a
+      href="/"
+      class="text-lg font-bold text-gray-900 hover:text-brand-600 transition-colors"
+    >
+      {siteConfig.businessName}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden items-center gap-6 md:flex">
+      <a href="/" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">
+        Home
+      </a>
+      <a href="#services" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">
+        Services
+      </a>
+      <a href="#about" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">
+        About
+      </a>
+      <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">
+        Contact
+      </a>
+      <a href={siteConfig.hero.primaryCtaHref} class="btn-primary text-sm">
+        {siteConfig.hero.primaryCta}
+      </a>
+    </div>
+
+    <!-- Mobile Navigation Toggle -->
+    <button
+      id="mobile-menu-toggle"
+      class="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-brand-500 md:hidden"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      type="button"
+    >
+      <svg id="menu-icon-open" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="menu-icon-close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Dropdown -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-gray-100 bg-white md:hidden"
+    role="navigation"
+    aria-label="Mobile navigation"
+  >
+    <div class="space-y-1 px-4 py-3">
+      <a href="/" class="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-brand-600">
+        Home
+      </a>
+      <a href="#services" class="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-brand-600">
+        Services
+      </a>
+      <a href="#about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-brand-600">
+        About
+      </a>
+      <a href="#contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-brand-600">
+        Contact
+      </a>
+      <a href={siteConfig.hero.primaryCtaHref} class="btn-primary mt-2 block text-center text-base">
+        {siteConfig.hero.primaryCta}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("menu-icon-open");
+  const iconClose = document.getElementById("menu-icon-close");
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      menu.classList.toggle("hidden");
+      iconOpen?.classList.toggle("hidden");
+      iconClose?.classList.toggle("hidden");
+    });
+
+    // Close menu on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+        toggle.click();
+        toggle.focus();
+      }
+    });
+
+    // Close menu on outside click
+    document.addEventListener("click", (e) => {
+      if (!menu.classList.contains("hidden") && !toggle.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+        toggle.click();
+      }
+    });
+  }
+</script>

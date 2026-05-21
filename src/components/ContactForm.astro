@@ -1,0 +1,351 @@
+---
+import { siteConfig } from "../config/site.config";
+
+// Turnstile site key is public by design — safe to pass to client
+const turnstileSiteKey = Astro.locals.runtime?.env?.TURNSTILE_SITE_KEY
+  || import.meta.env.TURNSTILE_SITE_KEY
+  || "1x0000000000000000000000000000000000AAA";
+---
+
+<section
+  id="contact"
+  class="section-padding bg-gray-50"
+  aria-label="Contact form"
+>
+  <div class="container-narrow">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Get in Touch
+      </h2>
+      <p class="mt-4 text-lg text-gray-600">
+        Ready to get started? Fill out the form below and we'll get back to you
+        within 24 hours.
+      </p>
+    </div>
+
+    <div class="mt-10 mx-auto max-w-xl">
+      <form
+        id="contact-form"
+        novalidate
+        class="space-y-6"
+      >
+        <!-- Name -->
+        <div>
+          <label for="contact-name" class="block text-sm font-medium text-gray-700">
+            Name <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="text"
+            id="contact-name"
+            name="name"
+            required
+            autocomplete="name"
+            class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            placeholder="Your full name"
+          />
+          <p class="mt-1 hidden text-xs text-red-600 error-message" data-for="name"></p>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="contact-email" class="block text-sm font-medium text-gray-700">
+            Email <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="email"
+            id="contact-email"
+            name="email"
+            required
+            autocomplete="email"
+            class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            placeholder="you@example.com"
+          />
+          <p class="mt-1 hidden text-xs text-red-600 error-message" data-for="email"></p>
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label for="contact-phone" class="block text-sm font-medium text-gray-700">
+            Phone <span class="text-gray-400">(optional)</span>
+          </label>
+          <input
+            type="tel"
+            id="contact-phone"
+            name="phone"
+            autocomplete="tel"
+            class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            placeholder="(555) 123-4567"
+          />
+          <p class="mt-1 hidden text-xs text-red-600 error-message" data-for="phone"></p>
+        </div>
+
+        <!-- Service Needed -->
+        <div>
+          <label for="contact-service" class="block text-sm font-medium text-gray-700">
+            Service Needed <span class="text-gray-400">(optional)</span>
+          </label>
+          <select
+            id="contact-service"
+            name="service"
+            class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+          >
+            <option value="">Select a service...</option>
+            {siteConfig.services.map((service) => (
+              <option value={service.title} key={service.title}>
+                {service.title}
+              </option>
+            ))}
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- City / ZIP -->
+        <div>
+          <label for="contact-city" class="block text-sm font-medium text-gray-700">
+            City / ZIP <span class="text-gray-400">(optional)</span>
+          </label>
+          <input
+            type="text"
+            id="contact-city"
+            name="city"
+            autocomplete="address-level2"
+            class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            placeholder="Tulsa, OK"
+          />
+        </div>
+
+        <!-- Preferred Contact Method -->
+        <fieldset>
+          <legend class="text-sm font-medium text-gray-700">
+            Preferred Contact Method <span class="text-gray-400">(optional)</span>
+          </legend>
+          <div class="mt-2 flex gap-4">
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+              <input
+                type="radio"
+                name="preferredContact"
+                value="email"
+                checked
+                class="h-4 w-4 text-brand-600 border-gray-300 focus:ring-brand-500"
+              />
+              Email
+            </label>
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+              <input
+                type="radio"
+                name="preferredContact"
+                value="phone"
+                class="h-4 w-4 text-brand-600 border-gray-300 focus:ring-brand-500"
+              />
+              Phone
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Message -->
+        <div>
+          <label for="contact-message" class="block text-sm font-medium text-gray-700">
+            Message <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="contact-message"
+            name="message"
+            required
+            rows="5"
+            class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 resize-y"
+            placeholder="Tell us about your project or what you need help with..."
+          ></textarea>
+          <p class="mt-1 hidden text-xs text-red-600 error-message" data-for="message"></p>
+        </div>
+
+        <!-- Honeypot field — hidden from users, visible to bots -->
+        <div aria-hidden="true" class="absolute -left-[9999px] opacity-0" style="position: absolute; left: -9999px;">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <!-- Turnstile Widget -->
+        <div id="turnstile-container" data-sitekey={turnstileSiteKey} class="flex justify-center min-h-[65px]"></div>
+        <p class="mt-1 hidden text-xs text-red-600 error-message" data-for="turnstile"></p>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          id="contact-submit"
+          disabled
+          class="btn-primary w-full text-base disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Send Message
+        </button>
+
+        <!-- Status Messages -->
+        <div id="form-success" class="hidden rounded-lg bg-green-50 p-4 text-sm text-green-800 text-center" role="alert">
+          <svg class="mx-auto mb-2 h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="font-medium">Thanks for reaching out!</p>
+          <p>We'll get back to you within 24 hours.</p>
+        </div>
+        <div id="form-error" class="hidden rounded-lg bg-red-50 p-4 text-sm text-red-800 text-center" role="alert">
+          <p id="form-error-message">Something went wrong. Please try again or call us directly.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Load Turnstile script
+  const turnstileScript = document.createElement("script");
+  turnstileScript.src =
+    "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad";
+  turnstileScript.async = true;
+  turnstileScript.defer = true;
+  document.head.appendChild(turnstileScript);
+
+  let turnstileToken = "";
+  let turnstileWidgetId = null;
+
+  window.onTurnstileLoad = function () {
+    const container = document.getElementById("turnstile-container");
+    turnstileWidgetId = turnstile.render(container, {
+      sitekey: container.dataset.sitekey,
+      callback: function (token) {
+        turnstileToken = token;
+        updateSubmitButton();
+      },
+      "expired-callback": function () {
+        turnstileToken = "";
+        updateSubmitButton();
+      },
+      "error-callback": function () {
+        turnstileToken = "";
+        updateSubmitButton();
+      },
+    });
+  };
+
+  // Form state
+  const form = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("contact-submit");
+  const successDiv = document.getElementById("form-success");
+  const errorDiv = document.getElementById("form-error");
+  const errorMessage = document.getElementById("form-error-message");
+
+  function updateSubmitButton() {
+    const name = document.getElementById("contact-name").value.trim();
+    const email = document.getElementById("contact-email").value.trim();
+    const message = document.getElementById("contact-message").value.trim();
+    submitBtn.disabled = !(name && email && message && turnstileToken);
+  }
+
+  // Real-time validation on required fields
+  ["contact-name", "contact-email", "contact-message"].forEach((id) => {
+    document.getElementById(id).addEventListener("input", updateSubmitButton);
+  });
+
+  // Show field-level error
+  function showError(fieldId, message) {
+    const errorEl = document.querySelector(`.error-message[data-for="${fieldId}"]`);
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.remove("hidden");
+    }
+    const input = document.getElementById(`contact-${fieldId}`) || document.getElementById(fieldId);
+    if (input) {
+      input.classList.add("border-red-500", "focus:border-red-500", "focus:ring-red-500/20");
+    }
+  }
+
+  function clearErrors() {
+    document.querySelectorAll(".error-message").forEach((el) => {
+      el.textContent = "";
+      el.classList.add("hidden");
+    });
+    document.querySelectorAll(".border-red-500").forEach((el) => {
+      el.classList.remove("border-red-500", "focus:border-red-500", "focus:ring-red-500/20");
+    });
+  }
+
+  // Form submission
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    clearErrors();
+
+    const name = document.getElementById("contact-name").value.trim();
+    const email = document.getElementById("contact-email").value.trim();
+    const phone = document.getElementById("contact-phone").value.trim();
+    const service = document.getElementById("contact-service").value;
+    const city = document.getElementById("contact-city").value.trim();
+    const preferredContact = document.querySelector(
+      'input[name="preferredContact"]:checked'
+    )?.value;
+    const message = document.getElementById("contact-message").value.trim();
+    const website = document.getElementById("website").value;
+
+    // Reset UI
+    successDiv.classList.add("hidden");
+    errorDiv.classList.add("hidden");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    const payload = {
+      name,
+      email,
+      phone,
+      service,
+      city,
+      preferredContact,
+      message,
+      website,
+      turnstileToken,
+      _timestamp: Date.now(),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Show success
+        successDiv.classList.remove("hidden");
+        form.querySelectorAll("input, textarea, select").forEach((el) => {
+          if (el.type !== "hidden" && el.name !== "preferredContact") {
+            if (el.type !== "radio") el.value = "";
+          }
+        });
+        // Reset Turnstile
+        if (turnstileWidgetId) {
+          turnstile.reset(turnstileWidgetId);
+        }
+        turnstileToken = "";
+        submitBtn.disabled = true;
+        // Scroll to success
+        successDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        // Show server-side errors
+        if (data.errors) {
+          for (const [field, msgs] of Object.entries(data.errors)) {
+            showError(field, msgs[0]);
+          }
+        }
+        errorMessage.textContent =
+          data.message || "Something went wrong. Please try again.";
+        errorDiv.classList.remove("hidden");
+      }
+    } catch (err) {
+      errorMessage.textContent =
+        "Network error. Please check your connection and try again.";
+      errorDiv.classList.remove("hidden");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send Message";
+      updateSubmitButton();
+    }
+  });
+</script>

@@ -1,0 +1,50 @@
+---
+import { siteConfig } from "../config/site.config";
+---
+
+{siteConfig.gallery.enabled && siteConfig.gallery.items.length > 0 && (
+  <section
+    id="gallery"
+    class="section-padding bg-gray-50"
+    aria-label="Gallery"
+  >
+    <div class="container-narrow">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          {siteConfig.gallery.headline}
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {siteConfig.gallery.items.map((item) => (
+          <figure class="group overflow-hidden rounded-xl shadow-sm">
+            <div class="aspect-video overflow-hidden bg-gray-100">
+              <img
+                src={item.image}
+                alt={item.alt}
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                width="600"
+                height="338"
+              />
+            </div>
+            {(item.title || item.description) && (
+              <figcaption class="bg-white p-4">
+                {item.title && (
+                  <h3 class="text-sm font-semibold text-gray-900">
+                    {item.title}
+                  </h3>
+                )}
+                {item.description && (
+                  <p class="mt-1 text-sm text-gray-600">
+                    {item.description}
+                  </p>
+                )}
+              </figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

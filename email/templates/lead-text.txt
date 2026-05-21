@@ -1,0 +1,15 @@
+ New Website Lead — {{name}}
+
+Name: {{name}}
+Email: {{email}}
+Phone: {{phone}}
+Service Needed: {{service}}
+Preferred Contact: {{preferredContact}}
+City / ZIP: {{city}}
+
+Message:
+{{message}}
+
+---
+Submitted: {{timestamp}}
+IP: {{ip}}

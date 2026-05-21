@@ -1,0 +1,43 @@
+---
+import { siteConfig } from "../config/site.config";
+---
+
+<section
+  id="hero"
+  class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white"
+  aria-label="Introduction"
+>
+  <div class="section-padding">
+    <div class="container-narrow">
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+          {siteConfig.hero.headline}
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl">
+          {siteConfig.hero.subheadline}
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href={siteConfig.hero.primaryCtaHref} class="btn-primary text-base sm:text-lg">
+            {siteConfig.hero.primaryCta}
+          </a>
+          <a href={siteConfig.hero.secondaryCtaHref} class="btn-secondary text-base sm:text-lg">
+            {siteConfig.hero.secondaryCta}
+          </a>
+        </div>
+      </div>
+
+      {siteConfig.hero.image && (
+        <div class="mt-12">
+          <img
+            src={siteConfig.hero.image}
+            alt={siteConfig.hero.headline}
+            class="mx-auto rounded-xl shadow-lg"
+            width="800"
+            height="450"
+            loading="eager"
+          />
+        </div>
+      )}
+    </div>
+  </div>
+</section>
